@@ -1,0 +1,31 @@
+.table-data-container {
+  position: relative;
+  margin: 1rem;
+  overflow: auto;
+  /* border: 2px solid #d6b4b4; */
+  box-shadow: 0 3px 15px rgba(10, 9, 9, 0.2);
+  border-radius: 0.7rem;
+}
+
+table {
+  border-collapse: collapse;
+  margin-top: 1rem;
+  width: 35rem;
+  max-height: 23rem;
+}
+
+table th,
+table td {
+  max-width: 300px;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+table thead {
+  position: sticky;
+  inset-block-start: 0;
+  background-color: #ddd;
+}

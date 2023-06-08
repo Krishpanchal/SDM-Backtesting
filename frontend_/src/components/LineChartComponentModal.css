@@ -1,0 +1,32 @@
+.line-chart-container {
+  /* width: 500px;
+    height: 500px; */
+  position: relative;
+  margin: 0.5rem;
+  /* border: 2px solid #d6b4b4; */
+  box-shadow: 0 3px 15px rgba(10, 9, 9, 0.2);
+  border-radius: 1rem;
+  padding: 0rem;
+
+  box-shadow: 0 3px 15px rgba(10, 9, 9, 0.2);
+}
+
+.myoverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.btn {
+  border-radius: 30%;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  padding: 0.3rem;
+}

@@ -1,0 +1,17 @@
+.btn {
+  border-radius: 30%;
+  display: flex;
+  justify-content: center;
+  background-color: #e4e4de;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  padding: 0.3rem;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.5, 1.5);
+  cursor: pointer;
+  box-shadow: 0 3px 15px rgba(10, 9, 9, 0.2);
+}
