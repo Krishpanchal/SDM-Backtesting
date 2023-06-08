@@ -4,4 +4,4 @@ numpy
 Flask==2.0.1
 pandas_datareader==0.10.0
 yfinance==0.2.20
-pandas==1.5.1
+pandas==
