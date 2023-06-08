@@ -28,7 +28,7 @@ const ApiResponseState = (props) => {
     console.log(":heya");
     console.log(maxPosition, symbol1, symbol2, startDate, endDate);
     const response = await fetch(
-      `http://127.0.0.1:5000/sdm?symbol1=${symbol1}&symbol2=${symbol2}&start_date=${startDate}&end_date=${endDate}&max_position=${maxPosition}&standard_deviation_limit=${std}&moving_average_limit=${ma}&risk_free=${riskFree}`,
+      `https://pair-trading-sdm-backtesting.onrender.com/sdm?symbol1=${symbol1}&symbol2=${symbol2}&start_date=${startDate}&end_date=${endDate}&max_position=${maxPosition}&standard_deviation_limit=${std}&moving_average_limit=${ma}&risk_free=${riskFree}`,
       {}
     );
 
@@ -56,8 +56,7 @@ const ApiResponseState = (props) => {
         cellClickHandler,
         selectedCell,
         isLoading,
-      }}
-    >
+      }}>
       {props.children}
     </apiResponseContext.Provider>
   );
