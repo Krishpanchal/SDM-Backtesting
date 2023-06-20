@@ -14,14 +14,14 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+// ChartJS.register(
+//   CategoryScale,
+//   LinearScale,
+//   BarElement,
+//   Title,
+//   Tooltip,
+//   Legend
+// );
 
 Chart.register(zoomPlugin); // REGISTER PLUGIN
 Modal.setAppElement("#root");
@@ -137,13 +137,12 @@ export function BarChartDemo(props) {
     <div>
       <Title title={props.title} />
       <div
-        className="line-chart-container"
+        className='line-chart-container'
         // style={{ width: props.width, height: props.height }}
-        style={{ width: "40vw", height: "50vh" }}
-      >
+        style={{ width: "40vw", height: "50vh" }}>
         <Bar options={options} data={data} />
         {/* <div className="btn"> */}
-        <div className="btn" onClick={openModal}>
+        <div className='btn' onClick={openModal}>
           <FiMaximize2 />
         </div>
         {/* </div> */}
@@ -153,17 +152,15 @@ export function BarChartDemo(props) {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal"
-        overlayClassName="myoverlay"
-      >
+        contentLabel='Example Modal'
+        overlayClassName='myoverlay'>
         <Title title={props.title} />
         <div
-          className="line-chart-container"
-          style={{ width: "90vw", height: "90vh" }}
-        >
+          className='line-chart-container'
+          style={{ width: "90vw", height: "90vh" }}>
           <Bar options={options} data={data} />
           {/* <div className="btn"> */}
-          <div className="btn" onClick={closeModal}>
+          <div className='btn' onClick={closeModal}>
             <FiMinimize2 />
           </div>
           {/* </div> */}
