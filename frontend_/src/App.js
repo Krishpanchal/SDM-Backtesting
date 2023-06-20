@@ -17,17 +17,4 @@ function App() {
   );
 }
 
-// function App() {
-//   const context = useContext(apiResponseContext);
-//   const { apiResponse } = context;
-//   return (
-//     <div>
-//       <InputForm />
-//       {apiResponse === 0 ? "" : <HeatMapContainer />}
-
-//       {/* <div>{apiResponse === 0 ? "loading" : <DataTable />}</div> */}
-//     </div>
-//   );
-// }
-
 export default App;

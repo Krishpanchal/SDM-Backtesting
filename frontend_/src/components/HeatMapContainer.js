@@ -30,34 +30,21 @@ const HeatMapContainer = (props) => {
     d.push([arr]);
     console.log(`arr->${arr} d->${d.length}`);
   }
-  // std = [3, 4, 5];
-  // ma = [3, 4, 5, 6, 7];
-  // d = [
-  //   [0, 0, 0],
-  //   [0, 0, 0],
-  //   [0, 0, 0],
-  //   [0, 0, 0],
-  //   [0, 0, 0],
-  // ];
+
   console.log(d);
   apiResponse["result"].forEach((element) => {
-    d[parseInt(element["ma"]) - 3][parseInt(element["std"]) - 3] =
-      // element["df_analysis_json"][6]["value"];
+    try {
+      d[parseInt(element["ma"]) - 3][parseInt(element["std"]) - 3] =
+        // element["df_analysis_json"][6]["value"];
 
-      props.isGlobal
-        ? parseFloat(element[props.parameter])
-        : props.table == "df_summary_json"
-        ? parseFloat(
-            element[props.table].filter(
-              (data) => data["Output"] == props.parameter
-            )[0]["total"]
-          )
-        : parseFloat(
-            element[props.table].filter(
-              (data) => data["analysis"] == props.parameter
-            )[0]["value"]
-          );
-
+        parseFloat(
+          element[props.table].filter(
+            (data) => data["analysis"] == props.parameter
+          )[0]["value"]
+        );
+    } catch (err) {
+      console.log(err);
+    }
     // element["df_summary_json"][9]["total"];
   });
 
@@ -128,31 +115,51 @@ const HeatMapContainer = (props) => {
         lesserStyle: ((max + min) / 2 - value) / ((max + min) / 2 - min),
       },
 
-      "total_strategy_return_gross_pnl %": {
+      "total strategy return net pnl %": {
         pivot: (max + min) / 2,
         //1 - (max - value) / (max - min)
         greaterStyle: 1 - (max - value) / (max - (max + min) / 2),
         lesserStyle: ((max + min) / 2 - value) / ((max + min) / 2 - min),
       },
-      "CAGR strategt return gross pnl %": {
+      "CAGR strategy return net pnl %": {
         pivot: (max + min) / 2,
         //1 - (max - value) / (max - min)
         greaterStyle: 1 - (max - value) / (max - (max + min) / 2),
         lesserStyle: ((max + min) / 2 - value) / ((max + min) / 2 - min),
       },
       "sharpe ratio": {
-        pivot: (max + min) / 2,
-        //1 - (max - value) / (max - min)
-        greaterStyle: 1 - (max - value) / (max - (max + min) / 2),
-        lesserStyle: ((max + min) / 2 - value) / ((max + min) / 2 - min),
+        pivot: 1,
+        greaterStyle: 1 - (max - value) / (max - 1),
+        lesserStyle: 1 - (min - value) / (min - 1),
       },
       "sortino ratio": {
+        pivot: 1,
+        greaterStyle: 1 - (max - value) / (max - 1),
+        // lesserStyle: 1 - (1 - value) / (1 - min),
+        lesserStyle: 1 - (min - value) / (min - 1),
+      },
+      "calmar ratio": {
+        pivot: 1,
+        greaterStyle: 1 - (max - value) / (max - 1),
+        lesserStyle: 1 - (min - value) / (min - 1),
+      },
+      "strategy net cum pnl": {
+        pivot: 0,
+        greaterStyle: 1 - (max - value) / max,
+        lesserStyle: 1 - (min - value) / min,
+      },
+      "strategy gross cum pnl": {
+        pivot: 0,
+        greaterStyle: 1 - (max - value) / max,
+        lesserStyle: 1 - (min - value) / min,
+      },
+      "transaction costs gross pnl %": {
         pivot: (max + min) / 2,
         //1 - (max - value) / (max - min)
         greaterStyle: 1 - (max - value) / (max - (max + min) / 2),
         lesserStyle: ((max + min) / 2 - value) / ((max + min) / 2 - min),
       },
-      "calmar ratio": {
+      "max draw down %": {
         pivot: (max + min) / 2,
         //1 - (max - value) / (max - min)
         greaterStyle: 1 - (max - value) / (max - (max + min) / 2),
@@ -173,67 +180,74 @@ const HeatMapContainer = (props) => {
     localStorage.setItem("data", JSON.stringify(selectedData));
 
     // navigate("/details");
-    window.open("http://localhost:3000/details", "_blank");
+    window.open(
+      "https://pair-trading-sdm-backtesting.onrender.com/details",
+      "_blank"
+    );
   };
 
   return (
     <div>
-      <div className="heat-map-container">
-        <Title title={props.parameter} />
-        <HeatMap
-          xLabels={std}
-          cellRender={(value) => value && `${value}`}
-          yLabels={ma}
-          data={d}
-          // xLabels={[1, 2, 3,4,5]}
-          // cellRender={(value) => value && `${value}`}
-          // yLabels={[1, 2, 3,4,5]}
-          // data={[
-          //   [18, 19, 20],
-          //   [11, 13, 14],
-          //   [10, 15, 12],
-          //   [13, 11, 12],
-          //   [10, 16, 17],
-          // ]}
-          cellStyle={(background, value, min, max, data, x, y) => {
-            //if the cell > max/2->  1 - max-value/max- max/2
-            //else                   1-  value -min /max/2-min
-            let result = paramaterStyles(value, max, min);
+      <div className='heat-map-container'>
+        <Title title={props.title} />
+        <p style={{ textAlign: "center" }}>STD</p>
+        <div style={{ display: "flex" }}>
+          <p style={{ alignSelf: "center" }}>MA</p>
+          <div style={{ flex: "1 0 auto" }}>
+            <HeatMap
+              xLabels={std}
+              cellRender={(value) => value && `${value}`}
+              yLabels={ma}
+              data={d}
+              cellStyle={(background, value, min, max, data, x, y) => {
+                //if the cell > max/2->  1 - max-value/max- max/2
+                //else                   1-  value -min /max/2-min
+                let result = paramaterStyles(value, max, min);
 
-            let pivotValue = result[props.parameter].pivot;
-            let greater = result[props.parameter].greaterStyle;
-            let lesser = result[props.parameter].lesserStyle;
-            if (props.parameter == "profit factor") {
-              console.log(
-                // `${props.parameter}->${lesser} -> ${min} - ${value} / ${min}`
-                `${props.parameter} ${value} ->${lesser}`
-              );
-            }
-            if (x == 0) {
-              styles = { ...styles, marginLeft: "1rem" };
-            } else {
-              styles = { ...styles, marginLeft: "0" };
-            }
-            return value > pivotValue
-              ? {
-                  background: `rgba(0,128,0, ${greater})`,
-                  ...styles,
+                let pivotValue = result[props.parameter].pivot;
+                let greater = result[props.parameter].greaterStyle;
+                let lesser = result[props.parameter].lesserStyle;
+
+                if (x == 0) {
+                  styles = { ...styles, marginLeft: "1rem" };
+                } else {
+                  styles = { ...styles, marginLeft: "0" };
                 }
-              : {
-                  background: `rgba(220,20,60, ${lesser})`,
-                  ...styles,
-                };
+                let red = 0;
+                let green = 0;
+                let blue = 0;
 
-            // return {
-            //   background: `rgba(0,128,0, ${1 - (max - value) / (max - min)})`,
-            //   padding: "0.2rem",
-            //   fontSize: "15px",
-            //   fontWeight: "bold",
-            // };
-          }}
-          onClick={(x, y) => onCellClick(x + 3, y + 3)}
-          title={(value, unit) => `${value}`}
-        />
+                return value > pivotValue
+                  ? //for max drawdown the highest should be red and lowest should be green, else highest = green and lowest = red
+                    props.parameter == "max draw down %"
+                    ? {
+                        background: `rgba(220,20,60, ${greater})`,
+                        ...styles,
+                      }
+                    : {
+                        background: `rgba(0,128,0, ${greater})`,
+                        ...styles,
+                      }
+                  : props.parameter == "max draw down %"
+                  ? {
+                      background: `rgba(0,128,0, ${lesser})`,
+                      ...styles,
+                    }
+                  : {
+                      background: `rgba(220,20,60, ${lesser})`,
+                      ...styles,
+                    };
+
+                // {
+                //     background: `rgba(220,20,60, ${lesser})`,
+                //     ...styles,
+                //   }
+              }}
+              onClick={(x, y) => onCellClick(x + 3, y + 3)}
+              title={(value, unit) => `${value}`}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ const HomePage = () => {
               ""
             ) : (
               <HeatMapContainer
+                title="Sharpe Ratio"
                 parameter="sharpe ratio"
                 table="df_analysis_json"
               />
@@ -28,55 +29,18 @@ const HomePage = () => {
             {apiResponse === 0 ? (
               ""
             ) : (
-              <HeatMapContainer parameter="total pnl" table="df_summary_json" />
-            )}
-            {apiResponse === 0 ? (
-              ""
-            ) : (
               <HeatMapContainer
-                parameter="profit factor"
-                table="df_summary_json"
-              />
-            )}
-            {apiResponse === 0 ? (
-              ""
-            ) : (
-              <HeatMapContainer parameter="trades" table="df_summary_json" />
-            )}
-            {apiResponse === 0 ? (
-              ""
-            ) : (
-              <HeatMapContainer parameter="% win" table="df_summary_json" />
-            )}
-            {apiResponse === 0 ? (
-              ""
-            ) : (
-              <HeatMapContainer parameter="avg win" table="df_summary_json" />
-            )}
-            {apiResponse === 0 ? (
-              ""
-            ) : (
-              <HeatMapContainer parameter="avg lose" table="df_summary_json" />
-            )}
-            {/* {apiResponse === 0 ? (
-              ""
-            ) : (
-              <HeatMapContainer parameter="biggest win" />
-            )} */}
-            {apiResponse === 0 ? (
-              ""
-            ) : (
-              <HeatMapContainer
-                parameter="strategy_peak_count"
-                isGlobal={true}
-                table="global"
+                title="Strategy Net Cumulative PNL"
+                parameter="strategy net cum pnl"
+                table="df_analysis_json"
               />
             )}
             {apiResponse === 0 ? (
               ""
             ) : (
               <HeatMapContainer
-                parameter="gross pnl per trade"
+                title="Strategy Gross Cumulative PNL"
+                parameter="strategy gross cum pnl"
                 table="df_analysis_json"
               />
             )}
@@ -85,34 +49,45 @@ const HomePage = () => {
               ""
             ) : (
               <HeatMapContainer
-                parameter="total_strategy_return_gross_pnl %"
+                title="Transaction Costs Gross PNL"
+                parameter="transaction costs gross pnl %"
                 table="df_analysis_json"
               />
             )}
-
             {apiResponse === 0 ? (
               ""
             ) : (
               <HeatMapContainer
-                parameter="CAGR strategt return gross pnl %"
+                title="Max Draw Down %"
+                parameter="max draw down %"
                 table="df_analysis_json"
               />
             )}
-
             {apiResponse === 0 ? (
               ""
             ) : (
               <HeatMapContainer
-                parameter="sortino ratio"
-                table="df_analysis_json"
-              />
-            )}
-
-            {apiResponse === 0 ? (
-              ""
-            ) : (
-              <HeatMapContainer
+                title="Calmar Ratio"
                 parameter="calmar ratio"
+                table="df_analysis_json"
+              />
+            )}
+            {apiResponse === 0 ? (
+              ""
+            ) : (
+              <HeatMapContainer
+                title="CAGR strategy return net PNL %"
+                parameter="CAGR strategy return net pnl %"
+                table="df_analysis_json"
+              />
+            )}
+
+            {apiResponse === 0 ? (
+              ""
+            ) : (
+              <HeatMapContainer
+                title="Sortino Ratio"
+                parameter="sortino ratio"
                 table="df_analysis_json"
               />
             )}
