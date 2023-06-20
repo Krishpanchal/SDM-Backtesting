@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 import numpy as np
 from joblib import Parallel, delayed
 from SDMBT_FR import Backtest
@@ -76,6 +76,10 @@ def fetch_sdm_data():
     return jsonify({"result": json_list}), 200
 
 
+@app.route("/")
+def index():
+    return send_from_directory(app.static_folder,"index.html")
+
 # ------------------------------------------------------------
 if __name__ == "__main__":
-    app.run(debug=False,  port=6060)
+    app.run()
