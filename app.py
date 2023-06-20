@@ -6,7 +6,7 @@ import time
 import datetime as dt
 import json
 from flask_cors import CORS
-app = Flask(__name__)
+app = Flask(__name__,,static_folder='frontend_/build',static_url_path='')
 cors = CORS()
 cors.init_app(app)
 app.config['JSON_SORT_KEYS'] = False
