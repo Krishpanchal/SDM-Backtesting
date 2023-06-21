@@ -6,4 +6,3 @@ pandas_datareader==0.10.0
 yfinance==0.2.20
 pandas
 gunicorn
-os
