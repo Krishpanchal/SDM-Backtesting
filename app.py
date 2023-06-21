@@ -76,7 +76,7 @@ def fetch_sdm_data():
     return jsonify({"result": json_list}), 200
 
 
-@app.route("/")
+@app.route("/*")
 def index():
     return send_from_directory(app.static_folder,"index.html")
 
