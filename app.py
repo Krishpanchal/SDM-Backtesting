@@ -5,6 +5,7 @@ from SDMBT_FR import Backtest
 import time
 import datetime as dt
 import json
+import os
 from flask_cors import CORS
 app = Flask(__name__,static_folder='frontend_/build',static_url_path='')
 cors = CORS()
@@ -76,10 +77,13 @@ def fetch_sdm_data():
     return jsonify({"result": json_list}), 200
 
 
-@app.route("/*")
-def index():
-    return send_from_directory(app.static_folder,"index.html")
-
+@app.route("/",default={'path':''})
+@app.route("/<path>:<path>")
+def index(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 # ------------------------------------------------------------
 if __name__ == "__main__":
     app.run()
