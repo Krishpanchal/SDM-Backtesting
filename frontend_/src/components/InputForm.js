@@ -12,8 +12,8 @@ const InputForm = (props) => {
   const [endDate, setEndState] = useState("2022-10-05");
   const [maxPosition, setMaxPosition] = useState("10");
   const [riskFree, setRiskFree] = useState("5");
-  const [ma, setMa] = useState("10");
-  const [std, setStd] = useState("26");
+  const [ma, setMa] = useState("6");
+  const [std, setStd] = useState("6");
   const { getData } = context;
   const onFormSubmit = (e) => {
     e.preventDefault();

@@ -2,7 +2,6 @@ from datetime import date as dt, timedelta, datetime, timedelta
 import pandas as pd
 import os
 import numpy as np
-import statsmodels.api as sm
 from pandas_datareader import data as pdr
 import yfinance as yf
 import statistics
