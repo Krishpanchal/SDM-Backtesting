@@ -49,6 +49,7 @@ def fetch_sdm_data():
                           input_start_date, input_end_date, input_max_position, risk_free)
     sample_obj.fetch_data()
     initial_df = sample_obj.df
+    initial_df = initial_df.dropna()
     # converting date to string so that it becomes easy to show in ui
     initial_df['Date'] = initial_df['Date'].dt.strftime('%Y-%m-%d')
     # std-3-26 ma3-11
